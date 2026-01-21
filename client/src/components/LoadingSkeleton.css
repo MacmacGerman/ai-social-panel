@@ -1,0 +1,82 @@
+.skeleton-card,
+.skeleton-stat,
+.skeleton-list-item {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+}
+
+.skeleton-mounted {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.skeleton-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.skeleton-thumbnail {
+    width: 100%;
+    height: 200px;
+    border-radius: var(--radius-md);
+    background: var(--glass-overlay-light);
+}
+
+.skeleton-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.skeleton-line {
+    height: 16px;
+    border-radius: var(--radius-sm);
+    background: var(--glass-overlay-light);
+}
+
+.skeleton-line--title {
+    height: 24px;
+    width: 80%;
+}
+
+.skeleton-line--text {
+    height: 14px;
+    width: 100%;
+}
+
+.skeleton-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+    text-align: center;
+}
+
+.skeleton-circle {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--glass-overlay-light);
+}
+
+.skeleton-list-item {
+    display: flex;
+    gap: var(--space-4);
+    align-items: center;
+}
+
+.skeleton-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--glass-overlay-light);
+    flex-shrink: 0;
+}
+
+/* Shimmer animation already defined in index.css */

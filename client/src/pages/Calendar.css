@@ -1,0 +1,301 @@
+.calendar-page {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+
+.calendar-page__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--space-8);
+    gap: var(--space-4);
+}
+
+/* ============================================
+   CALENDAR CONTAINER
+   ============================================ */
+
+.calendar-container {
+    padding: var(--space-6);
+    margin-bottom: var(--space-6);
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-6);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.calendar-nav {
+    display: flex;
+    gap: var(--space-3);
+    align-items: center;
+}
+
+/* ============================================
+   DAY NAMES HEADER
+   ============================================ */
+
+.calendar-days-header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: var(--space-2);
+    margin-bottom: var(--space-3);
+}
+
+.day-name {
+    text-align: center;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    padding: var(--space-2);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ============================================
+   CALENDAR GRID
+   ============================================ */
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: var(--space-2);
+}
+
+.calendar-day {
+    aspect-ratio: 1;
+    min-height: 120px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+.calendar-day:hover {
+    background: var(--glass-overlay-light);
+    transform: scale(1.02);
+    border-color: rgba(255, 255, 255, 0.2);
+    z-index: 1;
+}
+
+.calendar-day--empty {
+    background: transparent;
+    border: none;
+    cursor: default;
+}
+
+.calendar-day--empty:hover {
+    transform: none;
+}
+
+.calendar-day--today {
+    border-color: var(--primary-500);
+    background: rgba(102, 126, 234, 0.1);
+}
+
+.calendar-day--today .calendar-day__number {
+    background: var(--gradient-primary);
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.calendar-day--has-posts::after {
+    content: '';
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 8px;
+    height: 8px;
+    background: var(--accent-cyan);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--accent-cyan);
+}
+
+.calendar-day__number {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-2);
+}
+
+/* ============================================
+   POST INDICATORS
+   ============================================ */
+
+.calendar-day__posts {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    flex: 1;
+    overflow: hidden;
+}
+
+.post-indicator {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    padding: var(--space-1) var(--space-2);
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: var(--radius-sm);
+    font-size: 0.6875rem;
+    border-left: 2px solid;
+    transition: all 0.2s ease;
+}
+
+.post-indicator:hover {
+    background: rgba(0, 0, 0, 0.5);
+    transform: translateX(2px);
+}
+
+.post-indicator--instagram {
+    border-color: #e1306c;
+}
+
+.post-indicator--tiktok {
+    border-color: #000000;
+}
+
+.post-indicator--youtube {
+    border-color: #ff0000;
+}
+
+.post-indicator__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.post-indicator--instagram .post-indicator__dot {
+    background: #e1306c;
+}
+
+.post-indicator--tiktok .post-indicator__dot {
+    background: #000000;
+}
+
+.post-indicator--youtube .post-indicator__dot {
+    background: #ff0000;
+}
+
+.post-indicator__title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.post-indicator__more {
+    font-size: 0.625rem;
+    color: var(--text-tertiary);
+    padding: var(--space-1);
+    text-align: center;
+    font-weight: 600;
+}
+
+/* ============================================
+   LEGEND
+   ============================================ */
+
+.calendar-legend {
+    padding: var(--space-4);
+}
+
+.calendar-legend h4 {
+    margin-bottom: var(--space-3);
+}
+
+.legend-items {
+    display: flex;
+    gap: var(--space-6);
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.legend-dot--instagram {
+    background: #e1306c;
+}
+
+.legend-dot--tiktok {
+    background: #000000;
+}
+
+.legend-dot--youtube {
+    background: #ff0000;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 1024px) {
+    .calendar-day {
+        min-height: 100px;
+    }
+
+    .post-indicator__title {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .calendar-page__header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .calendar-header {
+        flex-direction: column;
+        gap: var(--space-4);
+    }
+
+    .calendar-nav {
+        justify-content: center;
+    }
+
+    .calendar-day {
+        min-height: 80px;
+    }
+
+    .day-name {
+        font-size: 0.75rem;
+    }
+
+    .calendar-day__posts {
+        display: none;
+    }
+}

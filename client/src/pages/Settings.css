@@ -1,0 +1,379 @@
+.settings {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+
+.settings__header {
+    margin-bottom: var(--space-8);
+}
+
+/* ============================================
+   TABS
+   ============================================ */
+
+.settings__tabs {
+    display: flex;
+    gap: var(--space-2);
+    padding: var(--space-3);
+    margin-bottom: var(--space-6);
+    overflow-x: auto;
+}
+
+.tab {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-5);
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: var(--radius-lg);
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    font-family: var(--font-primary);
+}
+
+.tab:hover {
+    background: var(--glass-bg);
+    color: var(--text-primary);
+}
+
+.tab--active {
+    background: var(--gradient-primary);
+    border-color: transparent;
+    color: white;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.tab svg {
+    flex-shrink: 0;
+}
+
+/* ============================================
+   TAB CONTENT
+   ============================================ */
+
+.settings__content {
+    min-height: 400px;
+}
+
+.tab-content {
+    animation: fadeIn 0.3s ease;
+}
+
+/* ============================================
+   FORMS
+   ============================================ */
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-5);
+    margin-top: var(--space-6);
+}
+
+.form-actions {
+    display: flex;
+    gap: var(--space-3);
+    margin-top: var(--space-6);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--glass-border);
+    justify-content: flex-end;
+}
+
+/* ============================================
+   AVATAR UPLOAD
+   ============================================ */
+
+.avatar-upload {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    margin-top: var(--space-6);
+}
+
+.avatar-preview {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: var(--gradient-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.avatar-placeholder {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+}
+
+/* ============================================
+   API KEYS
+   ============================================ */
+
+.api-keys-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    margin-top: var(--space-6);
+}
+
+.api-key-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-5);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    transition: all 0.3s ease;
+}
+
+.api-key-item:hover {
+    background: var(--glass-overlay-light);
+    transform: translateX(4px);
+}
+
+.api-key-info {
+    display: flex;
+    gap: var(--space-4);
+    align-items: center;
+    flex: 1;
+}
+
+.api-key-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: var(--radius-md);
+    background: rgba(102, 126, 234, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-500);
+    flex-shrink: 0;
+}
+
+.api-key-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 var(--space-1) 0;
+}
+
+.api-key-value {
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    font-family: 'Courier New', monospace;
+    margin: 0 0 var(--space-1) 0;
+}
+
+.api-key-date {
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+    margin: 0;
+}
+
+.api-key-actions {
+    display: flex;
+    gap: var(--space-2);
+    align-items: center;
+}
+
+/* ============================================
+   PLAN CARD
+   ============================================ */
+
+.plan-card {
+    padding: var(--space-6);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    margin-top: var(--space-6);
+}
+
+.plan-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-4);
+}
+
+.plan-header h4 {
+    margin: 0;
+}
+
+.plan-price {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 var(--space-6) 0;
+}
+
+.plan-price span {
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+}
+
+.plan-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--space-6) 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.plan-features li {
+    font-size: 0.9375rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+/* ============================================
+   SOCIAL ACCOUNTS
+   ============================================ */
+
+.social-accounts-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.social-account-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+    padding: var(--space-5);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    transition: all 0.3s ease;
+}
+
+.social-account-card:hover {
+    background: var(--glass-overlay-light);
+    transform: translateX(4px);
+}
+
+.social-account-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.social-account-icon--instagram {
+    background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    color: white;
+}
+
+.social-account-icon--tiktok {
+    background: linear-gradient(135deg, #000000 0%, #ee1d52 100%);
+    color: white;
+}
+
+.social-account-icon--youtube {
+    background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%);
+    color: white;
+}
+
+.social-account-info {
+    flex: 1;
+}
+
+.social-account-name {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 var(--space-1) 0;
+}
+
+.social-account-desc {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin: 0 0 var(--space-3) 0;
+}
+
+.social-account-status {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.social-account-username {
+    font-size: 0.875rem;
+    color: var(--text-tertiary);
+    font-weight: 500;
+}
+
+.social-account-actions {
+    flex-shrink: 0;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+    .settings__tabs {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .api-key-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-4);
+    }
+
+    .api-key-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .avatar-upload {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .social-account-card {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .social-account-icon {
+        width: 56px;
+        height: 56px;
+    }
+
+    .social-account-actions {
+        width: 100%;
+    }
+
+    .social-account-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+}

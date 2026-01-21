@@ -1,0 +1,249 @@
+.library {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+
+.library__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--space-8);
+    gap: var(--space-4);
+}
+
+/* ============================================
+   FILTERS
+   ============================================ */
+
+.library__filters {
+    padding: var(--space-6);
+    margin-bottom: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.filter-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.filter-buttons {
+    display: flex;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: var(--space-2) var(--space-4);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: var(--font-primary);
+}
+
+.filter-btn:hover {
+    background: var(--glass-overlay-light);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.filter-btn--active {
+    background: var(--gradient-primary);
+    border-color: transparent;
+    color: white;
+}
+
+/* ============================================
+   POSTS GRID
+   ============================================ */
+
+.library__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--space-6);
+}
+
+/* ============================================
+   POST CARD
+   ============================================ */
+
+.post-card {
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+}
+
+.post-card:hover {
+    transform: translateY(-4px);
+}
+
+.post-card__thumbnail {
+    width: 100%;
+    aspect-ratio: 9/16;
+    background: var(--bg-tertiary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.thumbnail-placeholder {
+    color: var(--text-tertiary);
+    opacity: 0.5;
+}
+
+.ai-badge {
+    position: absolute;
+    top: var(--space-3);
+    right: var(--space-3);
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    padding: var(--space-1) var(--space-2);
+    background: rgba(102, 126, 234, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius-full);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.ai-badge svg {
+    width: 12px;
+    height: 12px;
+}
+
+/* ============================================
+   POST CONTENT
+   ============================================ */
+
+.post-card__content {
+    padding: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    flex: 1;
+}
+
+.post-card__header {
+    display: flex;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+}
+
+.post-card__caption {
+    font-size: 0.875rem;
+    color: var(--text-primary);
+    line-height: 1.6;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.post-card__hashtags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+}
+
+.hashtag-mini {
+    font-size: 0.6875rem;
+    color: var(--primary-500);
+    background: rgba(102, 126, 234, 0.1);
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-sm);
+    font-weight: 500;
+}
+
+.hashtag-mini--more {
+    background: var(--glass-bg);
+    color: var(--text-tertiary);
+}
+
+.post-card__campaign {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+    padding: var(--space-2);
+    background: var(--glass-bg);
+    border-radius: var(--radius-sm);
+}
+
+.post-card__campaign svg {
+    flex-shrink: 0;
+}
+
+.post-card__date {
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+    padding-top: var(--space-2);
+    border-top: 1px solid var(--glass-border);
+}
+
+.post-card__actions {
+    display: flex;
+    gap: var(--space-2);
+    margin-top: auto;
+}
+
+/* ============================================
+   EMPTY STATE
+   ============================================ */
+
+.library__empty {
+    grid-column: 1 / -1;
+    padding: var(--space-12);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+    .library__header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .library__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .filter-buttons {
+        flex-direction: column;
+    }
+
+    .filter-btn {
+        width: 100%;
+    }
+}

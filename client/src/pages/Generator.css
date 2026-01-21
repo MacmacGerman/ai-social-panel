@@ -1,0 +1,226 @@
+.generator {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+
+.generator__header {
+    margin-bottom: var(--space-8);
+}
+
+/* ============================================
+   GRID LAYOUT
+   ============================================ */
+
+.generator__grid {
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    gap: var(--space-6);
+    align-items: start;
+}
+
+/* ============================================
+   FORM
+   ============================================ */
+
+.generator__form {
+    position: sticky;
+    top: var(--space-6);
+}
+
+.form-group {
+    margin-bottom: var(--space-5);
+}
+
+.form-label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-2);
+}
+
+/* ============================================
+   PREVIEW
+   ============================================ */
+
+.generator__preview {
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+.preview-empty {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-12) var(--space-6);
+    text-align: center;
+}
+
+.preview-loading {
+    flex: 1;
+}
+
+.preview-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+}
+
+/* ============================================
+   PREVIEW SECTIONS
+   ============================================ */
+
+.preview-section {
+    padding: var(--space-4);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+}
+
+.preview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-3);
+}
+
+.preview-caption {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--text-primary);
+    white-space: pre-wrap;
+    padding: var(--space-3);
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius-md);
+}
+
+/* ============================================
+   HASHTAGS
+   ============================================ */
+
+.hashtags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: var(--space-3);
+}
+
+.hashtag {
+    display: inline-block;
+    padding: var(--space-2) var(--space-3);
+    background: rgba(102, 126, 234, 0.2);
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    border-radius: var(--radius-full);
+    font-size: 0.8125rem;
+    color: var(--primary-500);
+    font-weight: 500;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.hashtag:hover {
+    background: rgba(102, 126, 234, 0.3);
+    transform: translateY(-2px);
+}
+
+/* ============================================
+   SUGGESTIONS
+   ============================================ */
+
+.suggestions-list {
+    list-style: none;
+    margin-top: var(--space-3);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.suggestions-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    padding: var(--space-3);
+    background: rgba(16, 185, 129, 0.1);
+    border-left: 3px solid var(--success);
+    border-radius: var(--radius-sm);
+}
+
+.suggestions-list li svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: var(--success);
+}
+
+/* ============================================
+   PREVIEW ACTIONS
+   ============================================ */
+
+.preview-actions {
+    display: flex;
+    gap: var(--space-3);
+    margin-top: auto;
+    padding-top: var(--space-4);
+}
+
+.preview-actions .btn {
+    flex: 1;
+}
+
+/* ============================================
+   SPINNER
+   ============================================ */
+
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 1024px) {
+    .generator__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .generator__form {
+        position: relative;
+        top: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .preview-actions {
+        flex-direction: column;
+    }
+
+    .hashtags-list {
+        gap: var(--space-1);
+    }
+
+    .hashtag {
+        font-size: 0.75rem;
+        padding: var(--space-1) var(--space-2);
+    }
+}
