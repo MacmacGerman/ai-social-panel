@@ -2,6 +2,14 @@ import { useState, useEffect } from 'react'
 import './Toast.css'
 
 let toastId = 0
+let addToastFn = null
+
+// Export addToast function
+export function addToast(message, type = 'info', duration = 3000) {
+    if (addToastFn) {
+        addToastFn(message, type, duration)
+    }
+}
 
 function Toast({ message, type = 'info', duration = 3000, onClose }) {
     const [isVisible, setIsVisible] = useState(true)
@@ -68,14 +76,14 @@ function ToastContainer() {
     const [toasts, setToasts] = useState([])
 
     useEffect(() => {
-        // Expose addToast globally
-        window.addToast = (message, type = 'info', duration = 3000) => {
+        // Set the addToast function
+        addToastFn = (message, type = 'info', duration = 3000) => {
             const id = toastId++
             setToasts(prev => [...prev, { id, message, type, duration }])
         }
 
         return () => {
-            delete window.addToast
+            addToastFn = null
         }
     }, [])
 
