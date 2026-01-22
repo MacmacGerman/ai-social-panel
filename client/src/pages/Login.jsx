@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { supabase } from '../config/supabase'
 import authService from '../services/auth.service'
 import { addToast } from '../components/Toast'
 import './Login.css'
@@ -13,6 +14,27 @@ function Login() {
         fullName: ''
     })
     const [loading, setLoading] = useState(false)
+
+    // Check for existing session on mount
+    useEffect(() => {
+        supabase.auth.getSession().then(({ data: { session } }) => {
+            if (session) {
+                console.log('✅ Session found, redirecting...')
+                navigate('/')
+            }
+        })
+
+        // Listen for auth changes
+        const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+            console.log('🔔 Auth event:', event)
+            if (session && event === 'SIGNED_IN') {
+                console.log('✅ User signed in, redirecting...')
+                navigate('/')
+            }
+        })
+
+        return () => subscription.unsubscribe()
+    }, [navigate])
 
     const handleChange = (e) => {
         setFormData({
@@ -44,9 +66,20 @@ function Login() {
 
     const handleGoogleLogin = async () => {
         try {
-            await authService.googleAuth()
+            console.log('🚀 Iniciando Google OAuth...')
+            const { error } = await supabase.auth.signInWithOAuth({
+                provider: 'google',
+                options: {
+                    redirectTo: window.location.origin + '/login'
+                }
+            })
+
+            if (error) throw error
+
+            // Supabase will redirect automatically
         } catch (error) {
-            addToast('Error con Google OAuth', 'error')
+            console.error('❌ Error en Google OAuth:', error)
+            addToast('Error al conectar con Google', 'error')
         }
     }
 
