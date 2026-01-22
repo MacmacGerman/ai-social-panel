@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { supabase } from '../config/supabase'
-import authService from '../services/auth.service'
 import { addToast } from '../components/Toast'
 import './Login.css'
 
@@ -49,15 +48,37 @@ function Login() {
 
         try {
             if (isLogin) {
-                await authService.login(formData.email, formData.password)
+                // Login with Supabase
+                const { data, error } = await supabase.auth.signInWithPassword({
+                    email: formData.email,
+                    password: formData.password
+                })
+
+                if (error) throw error
+                
+                console.log('✅ Login exitoso:', data.user.email)
                 addToast('¡Bienvenido de vuelta!', 'success')
+                navigate('/')
             } else {
-                await authService.register(formData.email, formData.password, formData.fullName)
-                addToast('¡Cuenta creada exitosamente!', 'success')
+                // Register with Supabase
+                const { data, error } = await supabase.auth.signUp({
+                    email: formData.email,
+                    password: formData.password,
+                    options: {
+                        data: {
+                            full_name: formData.fullName
+                        }
+                    }
+                })
+
+                if (error) throw error
+
+                console.log('✅ Registro exitoso:', data.user.email)
+                addToast('¡Cuenta creada! Revisa tu email para confirmar.', 'success')
             }
-            navigate('/')
         } catch (error) {
-            const message = error.response?.data?.error || 'Error en la autenticación'
+            console.error('❌ Error en autenticación:', error)
+            const message = error.message || 'Error en la autenticación'
             addToast(message, 'error')
         } finally {
             setLoading(false)

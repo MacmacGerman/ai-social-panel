@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import authService from '../services/auth.service'
+import { supabase } from '../config/supabase'
 import './UserProfile.css'
 
 function UserProfile() {
@@ -7,13 +7,23 @@ function UserProfile() {
     const [showMenu, setShowMenu] = useState(false)
 
     useEffect(() => {
-        const currentUser = authService.getCurrentUser()
-        setUser(currentUser)
+        // Get current user from Supabase
+        supabase.auth.getUser().then(({ data: { user } }) => {
+            setUser(user)
+        })
+
+        // Listen for auth changes
+        const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+            setUser(session?.user || null)
+        })
+
+        return () => subscription.unsubscribe()
     }, [])
 
-    const handleLogout = () => {
+    const handleLogout = async () => {
         if (window.confirm('¿Cerrar sesión?')) {
-            authService.logout()
+            await supabase.auth.signOut()
+            window.location.href = '/login'
         }
     }
 
