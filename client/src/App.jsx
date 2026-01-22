@@ -1,4 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
+import { useEffect } from 'react'
+import { supabase } from './config/supabase'
 import Layout from './components/Layout'
 import ProtectedRoute from './components/ProtectedRoute'
 import { ToastContainer } from './components/Toast'
@@ -11,6 +13,21 @@ import Settings from './pages/Settings'
 import Login from './pages/Login'
 
 function App() {
+    useEffect(() => {
+        // Listen for auth changes
+        const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+            console.log('🔔 Auth event:', event)
+            if (session) {
+                console.log('✅ User session:', session.user.email)
+                // Store user in localStorage for quick access
+                localStorage.setItem('user', JSON.stringify(session.user))
+            } else {
+                localStorage.removeItem('user')
+            }
+        })
+
+        return () => subscription.unsubscribe()
+    }, [])
     return (
         <>
             <ToastContainer />
