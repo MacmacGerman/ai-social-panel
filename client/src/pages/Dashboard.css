@@ -305,3 +305,33 @@
         height: 200px;
     }
 }
+
+/* Nuevos Estilos Inmobiliarios */
+.thumbnail-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+}
+
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-8);
+    text-align: center;
+    color: var(--text-tertiary);
+    gap: var(--space-4);
+    background: var(--glass-bg);
+    border-radius: var(--radius-lg);
+    border: 1px dashed var(--glass-border);
+}
+
+.badge--venta {
+    background: var(--accent-pink);
+}
+
+.badge--arriendo {
+    background: var(--accent-cyan);
+}
