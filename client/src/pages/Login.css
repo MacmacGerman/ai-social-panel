@@ -118,28 +118,51 @@
     flex-direction: column;
     justify-content: center;
     animation: slideInRight 0.6s ease;
+    position: relative;
+    background-image: linear-gradient(rgba(10, 10, 15, 0.7), rgba(10, 10, 15, 0.7)), url('/assets/hero-login.png');
+    background-size: cover;
+    background-position: center;
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--glass-border);
+    overflow: hidden;
+}
+
+.login-info::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, transparent 0%, rgba(10, 10, 15, 0.4) 100%);
+}
+
+.login-info>* {
+    position: relative;
+    z-index: 1;
 }
 
 .login-info h3 {
     margin-bottom: var(--space-6);
+    font-size: 1.75rem;
+    font-weight: 800;
 }
 
 .login-features {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: var(--space-4);
+    gap: var(--space-5);
 }
 
 .login-features li {
     display: flex;
     align-items: center;
-    gap: var(--space-3);
-    color: var(--text-secondary);
+    gap: var(--space-4);
+    color: white;
+    font-weight: 500;
 }
 
 .login-features svg {
     color: var(--accent-cyan);
+    filter: drop-shadow(0 0 8px rgba(0, 242, 254, 0.5));
     flex-shrink: 0;
 }
 

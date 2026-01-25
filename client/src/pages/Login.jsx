@@ -136,16 +136,6 @@ function Login() {
                         </div>
                         <h1 className="h2">Propify SaaS</h1>
                         <p className="body-large" style={{ color: 'var(--text-secondary)' }}>
-                            {isLogin ? 'Accede a tu panel inmobiliario' : 'Empieza a vender propiedades'}
-                        </p>
-                    </div>
-
-                    <div className="login-header">
-                        <div className="login-logo">
-                            <Building2 size={40} />
-                        </div>
-                        <h1 className="h2">Propify SaaS</h1>
-                        <p className="body-large" style={{ color: 'var(--text-secondary)' }}>
                             Gestión Inmobiliaria Inteligente
                         </p>
                     </div>
@@ -167,7 +157,7 @@ function Login() {
                     </div>
 
                     <p className="body-small text-tertiary" style={{ textAlign: 'center', marginTop: 'var(--space-6)' }}>
-                        Acceso rápido y seguro sin contraseñas
+                        Acceso rápido y seguro para profesionales
                     </p>
                 </div>
 
