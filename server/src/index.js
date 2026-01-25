@@ -68,13 +68,21 @@ app.get('/health', (req, res) => {
     })
 })
 
-// API Routes
-app.use('/api/auth', authRoutes)
-app.use('/api/posts', postsRoutes)
-app.use('/api/campaigns', campaignsRoutes)
-app.use('/api/properties', propertiesRoutes)
-// app.use('/api/social', socialRoutes)
-app.use('/api/generate', generateRoutes)
+// API Routes Setup
+const apiRouter = express.Router()
+
+apiRouter.use('/auth', authRoutes)
+apiRouter.use('/posts', postsRoutes)
+apiRouter.use('/campaigns', campaignsRoutes)
+apiRouter.use('/properties', propertiesRoutes)
+apiRouter.use('/generate', generateRoutes)
+
+// Mount the API router at /api
+app.use('/api', apiRouter)
+
+// Also mount at root for flexibility with Vercel rewrites
+// This acts as a fallback if the /api prefix is stripped by the host
+app.use('/', apiRouter)
 
 // 404 handler
 app.use('*', (req, res) => {
