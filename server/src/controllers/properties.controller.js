@@ -1,4 +1,4 @@
-import { supabase } from '../config/supabase.js'
+import { supabaseAdmin as supabase } from '../config/supabase.js'
 
 // Get all properties for an organization
 export const getProperties = async (req, res, next) => {
