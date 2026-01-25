@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
+import { toPng } from 'html-to-image';
 import { useNavigate } from 'react-router-dom'
-import { Plus, Trash2, Home, Download, Save, Image as ImageIcon, Sparkles } from 'lucide-react'
+import { Plus, Trash2, Home, Download, Save, Image as ImageIcon, Sparkles, Camera, MapPin, Bed, Bath, Share2 } from 'lucide-react'
 import { propertiesService } from '../../services/properties.service'
 import { generateService } from '../../services/generate.service'
 import { addToast } from '../../components/Toast';
