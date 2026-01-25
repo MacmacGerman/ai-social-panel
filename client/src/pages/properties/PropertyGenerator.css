@@ -1,0 +1,191 @@
+/* ESTRUCTURA DE LA PÁGINA */
+.property-generator {
+    padding: var(--space-6);
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.generator-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+    margin-top: var(--space-6);
+}
+
+/* FORMULARIO */
+.property-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    height: fit-content;
+}
+
+.form-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.grid-2-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+}
+
+.upload-box {
+    position: relative;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    border: 2px dashed var(--glass-border);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.upload-box:hover {
+    border-color: var(--primary-500);
+    background: var(--glass-overlay-light);
+}
+
+.upload-box input {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* CONTENEDOR DE VISTA PREVIA */
+.preview-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* EL LIENZO (ESTILO INSTAGRAM) */
+.instagram-canvas {
+    width: 450px; /* Tamaño fijo para consistencia en exportación post 1:1 */
+    height: 450px;
+    background: #000;
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-xl);
+}
+
+.canvas-image {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.canvas-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
+}
+
+.canvas-content {
+    position: relative;
+    height: 100%;
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    color: white;
+}
+
+.canvas-badge {
+    position: absolute;
+    top: var(--space-6);
+    right: var(--space-6);
+    background: var(--accent-pink);
+    padding: 0.25rem 1rem;
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 12px rgba(245, 87, 108, 0.4);
+}
+
+.canvas-title {
+    font-size: 1.75rem;
+    font-weight: 800;
+    margin-bottom: var(--space-1);
+    line-height: 1.1;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.canvas-price {
+    font-size: 1.5rem;
+    color: var(--accent-cyan);
+    font-weight: 700;
+    margin-bottom: var(--space-2);
+}
+
+.canvas-location {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: var(--space-4);
+}
+
+.canvas-features {
+    display: flex;
+    gap: 1.5rem;
+    padding: var(--space-3) 0;
+    border-top: 1px solid rgba(255,255,255,0.2);
+}
+
+.feature {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+}
+
+.canvas-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: var(--space-4);
+}
+
+.canvas-brand {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--primary-500);
+}
+
+.canvas-cta {
+    font-size: 0.75rem;
+    background: white;
+    color: black;
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+    .generator-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .instagram-canvas {
+        width: 100%;
+        max-width: 450px;
+        aspect-ratio: 1/1;
+        height: auto;
+    }
+}

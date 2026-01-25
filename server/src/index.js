@@ -9,6 +9,7 @@ import errorHandler from './middleware/errorHandler.js'
 import authRoutes from './routes/auth.routes.js'
 import postsRoutes from './routes/posts.routes.js'
 import campaignsRoutes from './routes/campaigns.routes.js'
+import propertiesRoutes from './routes/properties.routes.js'
 // import socialRoutes from './routes/social.routes.js'
 import generateRoutes from './routes/generate.routes.js'
 
@@ -51,6 +52,7 @@ app.get('/health', (req, res) => {
 app.use('/api/auth', authRoutes)
 app.use('/api/posts', postsRoutes)
 app.use('/api/campaigns', campaignsRoutes)
+app.use('/api/properties', propertiesRoutes)
 // app.use('/api/social', socialRoutes)
 app.use('/api/generate', generateRoutes)
 

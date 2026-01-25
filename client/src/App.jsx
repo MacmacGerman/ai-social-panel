@@ -11,6 +11,7 @@ import Generator from './pages/Generator'
 import Library from './pages/Library'
 import Settings from './pages/Settings'
 import Login from './pages/Login'
+import PropertyGenerator from './pages/properties/PropertyGenerator'
 
 function App() {
     useEffect(() => {
@@ -46,6 +47,7 @@ function App() {
                         <Route path="calendar" element={<Calendar />} />
                         <Route path="campaigns" element={<Campaigns />} />
                         <Route path="generator" element={<Generator />} />
+                        <Route path="properties/new" element={<PropertyGenerator />} />
                         <Route path="library" element={<Library />} />
                         <Route path="settings" element={<Settings />} />
                     </Route>
