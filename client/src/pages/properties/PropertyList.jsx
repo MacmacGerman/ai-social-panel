@@ -125,9 +125,9 @@ function PropertyList() {
                                     <span>{prop.address}</span>
                                 </div>
                                 <div className="card-features">
-                                    {(prop.features || []).slice(0, 3).map((f, i) => (
-                                        <span key={i} className="feature-pill">{f.text}</span>
-                                    ))}
+                                    {prop.features?.bedrooms > 0 && <span className="feature-pill">{prop.features.bedrooms} Dorm.</span>}
+                                    {prop.features?.bathrooms > 0 && <span className="feature-pill">{prop.features.bathrooms} Baños</span>}
+                                    {prop.features?.sqft > 0 && <span className="feature-pill">{prop.features.sqft} m²</span>}
                                 </div>
                                 <div className="card-actions">
                                     <button className="btn btn-glass btn-sm" onClick={() => navigate(`/properties/new?id=${prop.id}`)}>
