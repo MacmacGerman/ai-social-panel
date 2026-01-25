@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Building2, Building, Layout, Image, Share2, CheckCircle2 } from 'lucide-react'
 import { supabase } from '../config/supabase'
 import { addToast } from '../components/Toast'
