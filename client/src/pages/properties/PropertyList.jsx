@@ -20,7 +20,7 @@ function PropertyList() {
         try {
             setLoading(true)
             const data = await propertiesService.getProperties()
-            setProperties(data)
+            setProperties(data || [])
         } catch (error) {
             console.error('Error fetching properties:', error)
             addToast('Error al cargar propiedades', 'error')
