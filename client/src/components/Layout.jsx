@@ -34,21 +34,6 @@ function Layout() {
                             <span>Generador IA</span>
                         </NavLink>
 
-                        <NavLink to="/calendar" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-                            <Calendar size={24} />
-                            <span>Calendario</span>
-                        </NavLink>
-
-                        <NavLink to="/campaigns" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-                            <Home size={24} />
-                            <span>Campañas</span>
-                        </NavLink>
-
-                        <NavLink to="/library" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-                            <Folder size={24} />
-                            <span>Biblioteca</span>
-                        </NavLink>
-
                         <NavLink to="/settings" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
                             <Settings size={24} />
                             <span>Configuración</span>

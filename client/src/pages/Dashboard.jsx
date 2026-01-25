@@ -128,7 +128,7 @@ function Dashboard() {
                                     </div>
                                     <div className="post-item__content">
                                         <div className="post-item__header">
-                                            <span className={`badge badge--${prop.status === 'venta' ? 'instagram' : 'tiktok'}`}>
+                                            <span className={`badge badge--${prop.status}`}>
                                                 {prop.status.toUpperCase()}
                                             </span>
                                             <span className="badge badge--published">ACTIVO</span>
