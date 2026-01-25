@@ -45,7 +45,7 @@ const PropertyGenerator = () => {
       addToast('Propiedad guardada exitosamente', 'success');
     } catch (err) {
       console.error('Error al guardar propiedad:', err);
-      addToast('Error al guardar la propiedad', 'error');
+      addToast(`Error: ${err.response?.data?.error || err.message || 'No se pudo guardar'}`, 'error');
     } finally {
       setIsSaving(false);
     }

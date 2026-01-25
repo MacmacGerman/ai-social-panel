@@ -22,33 +22,40 @@ export const authMiddleware = async (req, res, next) => {
             .eq('id', user.id)
             .single()
 
-        // AUTO-PROVISIONING: If profile doesn't exist (after a reset)
-        if (profileError && profileError.code === 'PGRST116') {
-            console.log('🔄 Profile missing, auto-provisioning for user:', user.email)
+        // AUTO-PROVISIONING: If profile doesn't exist OR has no organization
+        if ((profileError && profileError.code === 'PGRST116') || (profile && !profile.organization_id)) {
+            console.log('🔄 Auto-provisioning required for user:', user.email)
 
-            // 1. Create a default organization
-            const { data: org, error: orgError } = await supabaseAdmin
-                .from('organizations')
-                .insert({ name: `${user.email.split('@')[0]}'s Organization` })
-                .select()
-                .single()
+            let orgId = profile?.organization_id
 
-            if (orgError) throw orgError
+            // 1. Create organization if missing
+            if (!orgId) {
+                const { data: org, error: orgError } = await supabaseAdmin
+                    .from('organizations')
+                    .insert({ name: `${user.email.split('@')[0]}'s Organization` })
+                    .select()
+                    .single()
 
-            // 2. Create the profile
-            const { data: newProfile, error: newProfileError } = await supabaseAdmin
+                if (orgError) throw orgError
+                orgId = org.id
+                profile = { ...profile, organizations: org }
+            }
+
+            // 2. Create or Update profile
+            const profileData = {
+                id: user.id,
+                organization_id: orgId,
+                full_name: user.user_metadata?.full_name || user.email.split('@')[0]
+            }
+
+            const { data: updatedProfile, error: upsertError } = await supabaseAdmin
                 .from('user_profiles')
-                .insert({
-                    id: user.id,
-                    organization_id: org.id,
-                    full_name: user.user_metadata?.full_name || user.email.split('@')[0]
-                })
-                .select()
+                .upsert(profileData)
+                .select('*, organizations(*)')
                 .single()
 
-            if (newProfileError) throw newProfileError
-
-            profile = { ...newProfile, organizations: org }
+            if (upsertError) throw upsertError
+            profile = updatedProfile
         } else if (profileError) {
             throw profileError
         }
