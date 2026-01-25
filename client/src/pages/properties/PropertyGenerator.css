@@ -66,7 +66,8 @@
 
 /* EL LIENZO (ESTILO INSTAGRAM) */
 .instagram-canvas {
-    width: 450px; /* Tamaño fijo para consistencia en exportación post 1:1 */
+    width: 450px;
+    /* Tamaño fijo para consistencia en exportación post 1:1 */
     height: 450px;
     background: #000;
     position: relative;
@@ -88,7 +89,7 @@
 .canvas-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.3) 50%, transparent 100%);
 }
 
 .canvas-content {
@@ -119,7 +120,7 @@
     font-weight: 800;
     margin-bottom: var(--space-1);
     line-height: 1.1;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .canvas-price {
@@ -134,7 +135,7 @@
     align-items: center;
     gap: 0.5rem;
     font-size: 0.875rem;
-    color: rgba(255,255,255,0.8);
+    color: rgba(255, 255, 255, 0.8);
     margin-bottom: var(--space-4);
 }
 
@@ -142,7 +143,7 @@
     display: flex;
     gap: 1.5rem;
     padding: var(--space-3) 0;
-    border-top: 1px solid rgba(255,255,255,0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .feature {
@@ -176,16 +177,45 @@
     font-weight: 700;
 }
 
-/* RESPONSIVE */
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
+    .property-generator {
+        padding: var(--space-4);
+    }
+
     .generator-grid {
         grid-template-columns: 1fr;
+        gap: var(--space-6);
     }
-    
+
+    .property-form {
+        order: 1;
+        /* Form first */
+    }
+
+    .preview-container {
+        order: 2;
+        /* Preview after form */
+        padding-top: var(--space-6);
+        border-top: 1px solid var(--glass-border);
+    }
+
     .instagram-canvas {
         width: 100%;
-        max-width: 450px;
+        max-width: 350px;
         aspect-ratio: 1/1;
         height: auto;
+    }
+
+    .canvas-title {
+        font-size: 1.25rem;
+    }
+
+    .canvas-price {
+        font-size: 1.1rem;
+    }
+
+    .grid-2-cols {
+        grid-template-columns: 1fr;
+        /* Stack inputs on mobile */
     }
 }

@@ -48,6 +48,26 @@ function Layout() {
                 <main className="main-content">
                     <Outlet />
                 </main>
+
+                {/* Bottom Navigation (Mobile Only) */}
+                <nav className="bottom-nav">
+                    <NavLink to="/" end className={({ isActive }) => `bottom-nav__item ${isActive ? 'active' : ''}`}>
+                        <LayoutIcon size={20} />
+                        <span>Panel</span>
+                    </NavLink>
+                    <NavLink to="/properties" end className={({ isActive }) => `bottom-nav__item ${isActive ? 'active' : ''}`}>
+                        <Building2 size={20} />
+                        <span>Catálogo</span>
+                    </NavLink>
+                    <NavLink to="/properties/new" className={({ isActive }) => `bottom-nav__item ${isActive ? 'active' : ''}`}>
+                        <Sparkles size={20} />
+                        <span>IA</span>
+                    </NavLink>
+                    <NavLink to="/settings" className={({ isActive }) => `bottom-nav__item ${isActive ? 'active' : ''}`}>
+                        <Settings size={20} />
+                        <span>Perfil</span>
+                    </NavLink>
+                </nav>
             </div>
         </>
     )
