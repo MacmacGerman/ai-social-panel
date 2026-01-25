@@ -1,30 +1,57 @@
-import { useState } from 'react'
-import CreatePostModal from '../components/CreatePostModal'
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import propertiesService from '../services/properties.service'
+import { Home, Tag, Key, TrendingUp, Plus, Image, List } from 'lucide-react'
 import './Dashboard.css'
 
 function Dashboard() {
-    const [showCreateModal, setShowCreateModal] = useState(false)
+    const navigate = useNavigate()
+    const [stats, setStats] = useState({
+        total: 0,
+        venta: 0,
+        arriendo: 0,
+        marketing: 0
+    })
+    const [recentProperties, setRecentProperties] = useState([])
+    const [loading, setLoading] = useState(true)
 
-    const handleSavePost = (postData) => {
-        console.log('Saving post:', postData)
-    }
+    useEffect(() => {
+        const fetchDashboardData = async () => {
+            try {
+                const properties = await propertiesService.getProperties()
+
+                const statsMap = properties.reduce((acc, prop) => {
+                    acc.total++
+                    if (prop.status === 'venta') acc.venta++
+                    if (prop.status === 'arriendo') acc.arriendo++
+                    return acc
+                }, { total: 0, venta: 0, arriendo: 0, marketing: 0 })
+
+                setStats(statsMap)
+                setRecentProperties(properties.slice(0, 3))
+            } catch (error) {
+                console.error('Error fetching dashboard data:', error)
+            } finally {
+                setLoading(false)
+            }
+        }
+
+        fetchDashboardData()
+    }, [])
 
     return (
         <div className="dashboard fade-in">
             {/* Header */}
             <header className="dashboard__header">
                 <div>
-                    <h1 className="h1">Dashboard</h1>
+                    <h1 className="h1">Panel Inmobiliario</h1>
                     <p className="body-large" style={{ color: 'var(--text-secondary)' }}>
-                        Bienvenido a tu panel de gestión de contenido con IA
+                        Gestión inteligente de tus propiedades y marketing digital
                     </p>
                 </div>
-                <button className="btn btn-primary" onClick={() => setShowCreateModal(true)}>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <line x1="12" y1="5" x2="12" y2="19" />
-                        <line x1="5" y1="12" x2="19" y2="12" />
-                    </svg>
-                    <span>Nuevo Post</span>
+                <button className="btn btn-primary" onClick={() => navigate('/properties/new')}>
+                    <Plus size={20} />
+                    <span>Nueva Propiedad</span>
                 </button>
             </header>
 
@@ -32,136 +59,91 @@ function Dashboard() {
             <div className="stats-grid">
                 <div className="stat-card glass-card">
                     <div className="stat-card__icon stat-card__icon--primary">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-                            <line x1="16" y1="2" x2="16" y2="6" />
-                            <line x1="8" y1="2" x2="8" y2="6" />
-                            <line x1="3" y1="10" x2="21" y2="10" />
-                        </svg>
+                        <Home size={24} />
                     </div>
                     <div className="stat-card__content">
-                        <p className="stat-card__label">Posts Programados</p>
-                        <h3 className="stat-card__value">24</h3>
-                        <p className="stat-card__change stat-card__change--positive">+12% vs mes anterior</p>
+                        <p className="stat-card__label">Propiedades Totales</p>
+                        <h3 className="stat-card__value">{stats.total}</h3>
+                        <p className="stat-card__change stat-card__change--positive">Inventario activo</p>
                     </div>
                 </div>
 
                 <div className="stat-card glass-card">
                     <div className="stat-card__icon stat-card__icon--accent">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <path d="M12 2L2 7l10 5 10-5-10-5z" />
-                            <path d="M2 17l10 5 10-5" />
-                            <path d="M2 12l10 5 10-5" />
-                        </svg>
+                        <Tag size={24} />
                     </div>
                     <div className="stat-card__content">
-                        <p className="stat-card__label">Campañas Activas</p>
-                        <h3 className="stat-card__value">5</h3>
-                        <p className="stat-card__change stat-card__change--positive">+2 esta semana</p>
+                        <p className="stat-card__label">En Venta</p>
+                        <h3 className="stat-card__value">{stats.venta}</h3>
+                        <p className="stat-card__change">Disponibles ahora</p>
                     </div>
                 </div>
 
                 <div className="stat-card glass-card">
                     <div className="stat-card__icon stat-card__icon--success">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <circle cx="12" cy="12" r="3" />
-                            <path d="M12 1v6m0 6v6M5.64 5.64l4.24 4.24m4.24 4.24l4.24 4.24M1 12h6m6 0h6M5.64 18.36l4.24-4.24m4.24-4.24l4.24-4.24" />
-                        </svg>
+                        <Key size={24} />
                     </div>
                     <div className="stat-card__content">
-                        <p className="stat-card__label">Contenido IA</p>
-                        <h3 className="stat-card__value">156</h3>
-                        <p className="stat-card__change stat-card__change--positive">+45 este mes</p>
+                        <p className="stat-card__label">En Arriendo</p>
+                        <h3 className="stat-card__value">{stats.arriendo}</h3>
+                        <p className="stat-card__change">Listos para entrega</p>
                     </div>
                 </div>
 
                 <div className="stat-card glass-card">
                     <div className="stat-card__icon stat-card__icon--warning">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
-                        </svg>
+                        <TrendingUp size={24} />
                     </div>
                     <div className="stat-card__content">
-                        <p className="stat-card__label">Engagement Rate</p>
-                        <h3 className="stat-card__value">8.4%</h3>
-                        <p className="stat-card__change stat-card__change--positive">+1.2% vs promedio</p>
+                        <p className="stat-card__label">Posts Generados</p>
+                        <h3 className="stat-card__value">{stats.total * 2}</h3>
+                        <p className="stat-card__change stat-card__change--positive">+Marketing activo</p>
                     </div>
                 </div>
             </div>
 
             {/* Content Grid */}
             <div className="content-grid">
-                {/* Recent Posts */}
+                {/* Recent Properties */}
                 <div className="content-section glass-card">
                     <div className="section-header">
-                        <h3 className="h4">Posts Recientes</h3>
-                        <a href="#" className="link-primary">Ver todos</a>
+                        <h3 className="h4">Propiedades Recientes</h3>
+                        <button className="link-primary" onClick={() => console.log('Ver todas')}>Ver todas</button>
                     </div>
 
                     <div className="posts-list">
-                        <div className="post-item">
-                            <div className="post-item__thumbnail">
-                                <div className="thumbnail-placeholder">
-                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                                        <circle cx="8.5" cy="8.5" r="1.5" />
-                                        <polyline points="21 15 16 10 5 21" />
-                                    </svg>
+                        {loading ? (
+                            <p>Cargando propiedades...</p>
+                        ) : recentProperties.length > 0 ? (
+                            recentProperties.map(prop => (
+                                <div key={prop.id} className="post-item">
+                                    <div className="post-item__thumbnail">
+                                        {prop.main_image_url ? (
+                                            <img src={prop.main_image_url} alt={prop.title} className="thumbnail-img" />
+                                        ) : (
+                                            <div className="thumbnail-placeholder">
+                                                <Home size={32} />
+                                            </div>
+                                        )}
+                                    </div>
+                                    <div className="post-item__content">
+                                        <div className="post-item__header">
+                                            <span className={`badge badge--${prop.status === 'venta' ? 'instagram' : 'tiktok'}`}>
+                                                {prop.status.toUpperCase()}
+                                            </span>
+                                            <span className="badge badge--published">ACTIVO</span>
+                                        </div>
+                                        <p className="post-item__caption">{prop.title}</p>
+                                        <p className="post-item__date">{prop.price}</p>
+                                    </div>
                                 </div>
+                            ))
+                        ) : (
+                            <div className="empty-state">
+                                <p>No hay propiedades aún.</p>
+                                <button className="btn btn-glass btn-sm" onClick={() => navigate('/properties/new')}>Comienza aquí</button>
                             </div>
-                            <div className="post-item__content">
-                                <div className="post-item__header">
-                                    <span className="badge badge--instagram">Instagram</span>
-                                    <span className="badge badge--scheduled">Programado</span>
-                                </div>
-                                <p className="post-item__caption">
-                                    Nuevo producto lanzado 🚀 Descubre las características increíbles...
-                                </p>
-                                <p className="post-item__date">Programado para: 25 Ene, 10:00 AM</p>
-                            </div>
-                        </div>
-
-                        <div className="post-item">
-                            <div className="post-item__thumbnail">
-                                <div className="thumbnail-placeholder">
-                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                        <polygon points="23 7 16 12 23 17 23 7" />
-                                        <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
-                                    </svg>
-                                </div>
-                            </div>
-                            <div className="post-item__content">
-                                <div className="post-item__header">
-                                    <span className="badge badge--tiktok">TikTok</span>
-                                    <span className="badge badge--published">Publicado</span>
-                                </div>
-                                <p className="post-item__caption">
-                                    Tutorial rápido: Cómo usar nuestra app en 30 segundos ⏱️
-                                </p>
-                                <p className="post-item__date">Publicado: 21 Ene, 3:00 PM</p>
-                            </div>
-                        </div>
-
-                        <div className="post-item">
-                            <div className="post-item__thumbnail">
-                                <div className="thumbnail-placeholder">
-                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                        <polygon points="23 7 16 12 23 17 23 7" />
-                                        <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
-                                    </svg>
-                                </div>
-                            </div>
-                            <div className="post-item__content">
-                                <div className="post-item__header">
-                                    <span className="badge badge--youtube">YouTube</span>
-                                    <span className="badge badge--draft">Borrador</span>
-                                </div>
-                                <p className="post-item__caption">
-                                    5 tips para aumentar tu productividad con IA 💡
-                                </p>
-                                <p className="post-item__date">Creado: 20 Ene, 5:30 PM</p>
-                            </div>
-                        </div>
+                        )}
                     </div>
                 </div>
 
@@ -170,57 +152,38 @@ function Dashboard() {
                     <h3 className="h4">Acciones Rápidas</h3>
 
                     <div className="quick-actions">
-                        <button className="action-btn">
+                        <button className="action-btn" onClick={() => navigate('/properties/new')}>
                             <div className="action-btn__icon">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                    <circle cx="12" cy="12" r="3" />
-                                    <path d="M12 1v6m0 6v6M5.64 5.64l4.24 4.24m4.24 4.24l4.24 4.24M1 12h6m6 0h6M5.64 18.36l4.24-4.24m4.24-4.24l4.24-4.24" />
-                                </svg>
+                                <Plus size={24} />
                             </div>
                             <div className="action-btn__content">
-                                <h5 className="action-btn__title">Generar con IA</h5>
-                                <p className="action-btn__desc">Crea contenido automáticamente</p>
+                                <h5 className="action-btn__title">Nueva Propiedad</h5>
+                                <p className="action-btn__desc">Añade al inventario</p>
                             </div>
                         </button>
 
-                        <button className="action-btn">
+                        <button className="action-btn" onClick={() => navigate('/properties/new')}>
                             <div className="action-btn__icon">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-                                    <line x1="16" y1="2" x2="16" y2="6" />
-                                    <line x1="8" y1="2" x2="8" y2="6" />
-                                    <line x1="3" y1="10" x2="21" y2="10" />
-                                </svg>
+                                <Image size={24} />
                             </div>
                             <div className="action-btn__content">
-                                <h5 className="action-btn__title">Ver Calendario</h5>
-                                <p className="action-btn__desc">Planifica tus publicaciones</p>
+                                <h5 className="action-btn__title">Generar Marketing</h5>
+                                <p className="action-btn__desc">Crea posts de Instagram</p>
                             </div>
                         </button>
 
-                        <button className="action-btn">
+                        <button className="action-btn" onClick={() => console.log('Ver catálogo')}>
                             <div className="action-btn__icon">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                    <path d="M12 2L2 7l10 5 10-5-10-5z" />
-                                    <path d="M2 17l10 5 10-5" />
-                                    <path d="M2 12l10 5 10-5" />
-                                </svg>
+                                <List size={24} />
                             </div>
                             <div className="action-btn__content">
-                                <h5 className="action-btn__title">Nueva Campaña</h5>
-                                <p className="action-btn__desc">Organiza tu contenido</p>
+                                <h5 className="action-btn__title">Ver Catálogo</h5>
+                                <p className="action-btn__desc">Gestiona tus anuncios</p>
                             </div>
                         </button>
                     </div>
                 </div>
             </div>
-
-            {/* Modals */}
-            <CreatePostModal
-                isOpen={showCreateModal}
-                onClose={() => setShowCreateModal(false)}
-                onSave={handleSavePost}
-            />
         </div>
     )
 }
