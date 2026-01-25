@@ -28,8 +28,24 @@ app.use(cors({
         'http://localhost:5173',
         /\.vercel\.app$/
     ],
-    credentials: true
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
 }))
+
+// Handle preflight requests explicitly
+app.options('*', cors())
+
+// Request logger for debugging
+app.use((req, res, next) => {
+    console.log(`[Request] ${req.method} ${req.originalUrl}`)
+    next()
+})
+
+// Root route for health check
+app.get('/', (req, res) => {
+    res.json({ status: 'ok', message: 'API Root' })
+})
 
 // Rate limiting
 const limiter = rateLimit({
