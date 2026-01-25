@@ -24,7 +24,7 @@ export const propertiesService = {
     // Get all properties
     getProperties: async () => {
         const { data } = await api.get('/properties')
-        return data.properties
+        return data.properties || []
     },
 
     // Create a new property

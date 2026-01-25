@@ -18,9 +18,9 @@ function Dashboard() {
     useEffect(() => {
         const fetchDashboardData = async () => {
             try {
-                const properties = await propertiesService.getProperties()
+                const properties = await propertiesService.getProperties() || []
 
-                const statsMap = properties.reduce((acc, prop) => {
+                const statsMap = (properties || []).reduce((acc, prop) => {
                     acc.total++
                     if (prop.status === 'venta') acc.venta++
                     if (prop.status === 'arriendo') acc.arriendo++
@@ -28,7 +28,7 @@ function Dashboard() {
                 }, { total: 0, venta: 0, arriendo: 0, marketing: 0 })
 
                 setStats(statsMap)
-                setRecentProperties(properties.slice(0, 3))
+                setRecentProperties((properties || []).slice(0, 3))
             } catch (error) {
                 console.error('Error fetching dashboard data:', error)
             } finally {
