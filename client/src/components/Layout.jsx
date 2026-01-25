@@ -15,7 +15,7 @@ function Layout() {
                         <div className="sidebar__logo">
                             <Building2 size={32} />
                         </div>
-                        <h2 className="sidebar__title">Propify</h2>
+                        <h2 className="sidebar__title">Propify SaaS</h2>
                     </div>
 
                     <nav className="sidebar__nav">

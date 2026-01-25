@@ -106,7 +106,7 @@ const PropertyGenerator = () => {
         title: property.title,
         price: property.price,
         address: property.address,
-        features: property.features.map(f => f.text).join(', '),
+        features: `${property.bedrooms} Dormitorios, ${property.bathrooms} Baños, ${property.sqft}m2`,
         status: property.status
       });
 
@@ -129,7 +129,7 @@ const PropertyGenerator = () => {
     <div className="property-generator fade-in">
       <header className="section-header">
         <div>
-          <h1 className="h2">SaaS Inmobiliario - Generador de Marketing</h1>
+          <h1 className="h2">Propify SaaS - Generador de Marketing</h1>
           <p className="body-small" style={{ color: 'var(--text-secondary)' }}>
             Crea publicaciones impactantes para tus propiedades en segundos.
           </p>
