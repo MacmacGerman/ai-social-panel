@@ -21,10 +21,11 @@ function App() {
             console.log('🔔 Auth event:', event)
             if (session) {
                 console.log('✅ User session:', session.user.email)
-                // Store user in localStorage for quick access
                 localStorage.setItem('user', JSON.stringify(session.user))
+                localStorage.setItem('access_token', session.access_token)
             } else {
                 localStorage.removeItem('user')
+                localStorage.removeItem('access_token')
             }
         })
 
