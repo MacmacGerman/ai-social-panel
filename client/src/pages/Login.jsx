@@ -67,6 +67,8 @@ function Login() {
                 if (error) throw error
 
                 console.log('✅ Login exitoso:', data.user.email)
+                localStorage.setItem('user', JSON.stringify(data.user))
+                localStorage.setItem('access_token', data.session.access_token)
                 addToast('¡Bienvenido de vuelta!', 'success')
                 navigate('/')
             } else {
