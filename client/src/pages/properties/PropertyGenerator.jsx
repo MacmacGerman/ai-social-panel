@@ -197,6 +197,13 @@ const PropertyGenerator = () => {
                   value={property.bathrooms} onChange={handleInputChange}
                 />
               </div>
+              <div className="form-group">
+                <label className="form-label">Metros Cuadrados (m²)</label>
+                <input
+                  type="number" name="sqft" className="input-glass"
+                  value={property.sqft} onChange={handleInputChange}
+                />
+              </div>
             </div>
 
             <div className="form-group">
