@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { Building2, Building, Layout, Image, Share2, CheckCircle2 } from 'lucide-react'
 import { supabase } from '../config/supabase'
 import { addToast } from '../components/Toast'
 import './Login.css'
@@ -129,14 +130,11 @@ function Login() {
                 <div className="login-card glass-card">
                     <div className="login-header">
                         <div className="login-logo">
-                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                <circle cx="12" cy="12" r="3" />
-                                <path d="M12 1v6m0 6v6M5.64 5.64l4.24 4.24m4.24 4.24l4.24 4.24M1 12h6m6 0h6M5.64 18.36l4.24-4.24m4.24-4.24l4.24-4.24" />
-                            </svg>
+                            <Building2 size={40} />
                         </div>
-                        <h1 className="h2">AI Social Panel</h1>
+                        <h1 className="h2">Propify SaaS</h1>
                         <p className="body-large" style={{ color: 'var(--text-secondary)' }}>
-                            {isLogin ? 'Inicia sesión para continuar' : 'Crea tu cuenta'}
+                            {isLogin ? 'Accede a tu panel inmobiliario' : 'Empieza a vender propiedades'}
                         </p>
                     </div>
 
@@ -243,31 +241,23 @@ function Login() {
                 </div>
 
                 <div className="login-info glass-card">
-                    <h3 className="h4">Gestiona tu contenido con IA</h3>
+                    <h3 className="h4">Tu oficina virtual inmobiliaria</h3>
                     <ul className="login-features">
                         <li>
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                <polyline points="20 6 9 17 4 12" />
-                            </svg>
-                            <span>Generación automática de captions</span>
+                            <Image size={20} />
+                            <span>Generación de posts para Instagram</span>
                         </li>
                         <li>
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                <polyline points="20 6 9 17 4 12" />
-                            </svg>
-                            <span>Calendario editorial inteligente</span>
+                            <Layout size={20} />
+                            <span>Gestión de inventario de propiedades</span>
                         </li>
                         <li>
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                <polyline points="20 6 9 17 4 12" />
-                            </svg>
-                            <span>Publicación en múltiples plataformas</span>
+                            <Share2 size={20} />
+                            <span>Publicación directa en redes sociales</span>
                         </li>
                         <li>
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                <polyline points="20 6 9 17 4 12" />
-                            </svg>
-                            <span>Analytics y reportes detallados</span>
+                            <CheckCircle2 size={20} />
+                            <span>Control total de tus ventas y arriendos</span>
                         </li>
                     </ul>
                 </div>
