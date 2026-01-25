@@ -153,28 +153,44 @@ export const generatePropertyDescription = async (req, res, next) => {
     try {
         const { title, price, address, features, status } = req.body
 
-        const prompt = `Actúa como un experto en copy inmobiliario de lujo. Genera una descripción persuasiva y emocional para la siguiente propiedad en ${status}:
+        const prompt = `Actúa como un Copywriter Inmobiliario Senior experto en el mercado de lujo en Chile. 
+        Tu tarea es transformar los datos de una propiedad en un anuncio irresistible para Instagram.
         
-        Título: ${title}
-        Precio: ${price}
-        Dirección: ${address}
-        Características: ${features}
+        PROPIEDAD:
+        - Tipo de operación: ${status === 'venta' ? 'VENTA' : 'ARRIENDO'}
+        - Título actual: ${title}
+        - Valor: ${price}
+        - Ubicación: ${address}
+        - Atributos: ${features}
 
-        Estructura de la respuesta:
-        1. Gancho inicial impactante.
-        2. Descripción de los beneficios clave (no solo características).
-        3. Llamada a la acción persuasiva.
+        REGLAS DE ORO:
+        1. Comienza con un GANCHO (Hook) que detenga el scroll (máximo 8 palabras).
+        2. Usa un tono ${status === 'venta' ? 'exclusivo, sofisticado y aspiracional' : 'moderno, cálido y acogedor'}.
+        3. No solo listes datos, vende una EXPERIENCIA de vida (ej: "Imagínate despertando con esta vista...").
+        4. Incluye 3 beneficios clave usando bullet points con emojis elegantes.
+        5. Termina con un Call to Action (CTA) potente invitando a ver el catálogo o enviar un DM.
+        6. Usa español de Chile (neutral/profesional).
         
-        Usa un tono ${status === 'venta' ? 'exclusivo y aspiracional' : 'acogedor y práctico'}. Incluye emojis pertinentes. No uses más de 200 palabras.`
+        IMPORTANTE: Devuelve PRIMERO una sugerencia de título optimizado de una sola línea, y luego el cuerpo del post.
+        Límite: 150 palabras.`
+
+        if (!model) {
+            throw new Error('Gemini AI Model not initialized. Check API Key.')
+        }
 
         const result = await model.generateContent(prompt)
         const response = await result.response
-        const description = response.text()
+        const text = response.text()
 
         res.json({
-            description: description.trim()
+            description: text.trim(),
+            success: true
         })
     } catch (error) {
-        next(error)
+        console.error('❌ Gemini Service Error:', error)
+        res.status(500).json({
+            error: 'La IA está descansando un momento. Inténtalo en unos segundos.',
+            details: error.message
+        })
     }
 }
