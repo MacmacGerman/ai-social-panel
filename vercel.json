@@ -1,4 +1,10 @@
 {
+    "rewrites": [
+        {
+            "source": "/(.*)",
+            "destination": "/client/index.html"
+        }
+    ],
     "git": {
         "deploymentEnabled": {
             "main": true
