@@ -1,5 +1,5 @@
 import { Outlet, NavLink } from 'react-router-dom'
-import { Building2, Home, Calendar, Layout as LayoutIcon, Folder, Settings } from 'lucide-react'
+import { Building2, Home, Calendar, Layout as LayoutIcon, Folder, Settings, Sparkles } from 'lucide-react'
 import AnimatedBackground from './AnimatedBackground'
 import UserProfile from './UserProfile'
 import './Layout.css'
@@ -24,9 +24,14 @@ function Layout() {
                             <span>Dashboard</span>
                         </NavLink>
 
+                        <NavLink to="/properties" end className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
+                            <Building2 size={24} />
+                            <span>Mi Catálogo</span>
+                        </NavLink>
+
                         <NavLink to="/properties/new" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-                            <Home size={24} />
-                            <span>Generador Inmobiliario</span>
+                            <Sparkles size={24} />
+                            <span>Generador IA</span>
                         </NavLink>
 
                         <NavLink to="/calendar" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>

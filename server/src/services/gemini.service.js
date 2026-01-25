@@ -147,3 +147,34 @@ export const generatePost = async (req, res, next) => {
         next(error)
     }
 }
+
+// Generate property description for real estate
+export const generatePropertyDescription = async (req, res, next) => {
+    try {
+        const { title, price, address, features, status } = req.body
+
+        const prompt = `Actúa como un experto en copy inmobiliario de lujo. Genera una descripción persuasiva y emocional para la siguiente propiedad en ${status}:
+        
+        Título: ${title}
+        Precio: ${price}
+        Dirección: ${address}
+        Características: ${features}
+
+        Estructura de la respuesta:
+        1. Gancho inicial impactante.
+        2. Descripción de los beneficios clave (no solo características).
+        3. Llamada a la acción persuasiva.
+        
+        Usa un tono ${status === 'venta' ? 'exclusivo y aspiracional' : 'acogedor y práctico'}. Incluye emojis pertinentes. No uses más de 200 palabras.`
+
+        const result = await model.generateContent(prompt)
+        const response = await result.response
+        const description = response.text()
+
+        res.json({
+            description: description.trim()
+        })
+    } catch (error) {
+        next(error)
+    }
+}

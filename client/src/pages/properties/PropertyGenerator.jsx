@@ -1,7 +1,8 @@
 import React, { useState, useRef } from 'react';
-import { toPng } from 'html-to-image';
-import { Camera, MapPin, Bed, Bath, Share2, Download, Home } from 'lucide-react';
-import propertiesService from '../../services/properties.service';
+import { useNavigate } from 'react-router-dom'
+import { Plus, Trash2, Home, Download, Save, Image as ImageIcon, Sparkles } from 'lucide-react'
+import { propertiesService } from '../../services/properties.service'
+import { generateService } from '../../services/generate.service'
 import { addToast } from '../../components/Toast';
 import './PropertyGenerator.css';
 
@@ -92,6 +93,38 @@ const PropertyGenerator = () => {
     }
   };
 
+  const handleGenerateAIDescription = async () => {
+    if (!property.title || !property.price) {
+      addToast('Ingresa título y precio para que la IA tenga contexto', 'info');
+      return;
+    }
+
+    try {
+      setIsSaving(true);
+      addToast('Generando descripción con IA...', 'info');
+      const aiDescription = await generateService.generatePropertyDescription({
+        title: property.title,
+        price: property.price,
+        address: property.address,
+        features: property.features.map(f => f.text).join(', '),
+        status: property.status
+      });
+
+      // Actualizar el título con la sugerencia de la IA si es necesario o un campo de descripción
+      // Por ahora, usaremos el título impactante que genera la IA si queremos, 
+      // pero para no romper el diseño, lo pondremos en un log o mensaje por ahora, 
+      // o mejor, actualizamos el título si el usuario lo desea.
+      // Decisión: La IA genera un bloque de texto, lo pondremos en un "caption" que guardaremos
+      setProperty(prev => ({ ...prev, title: aiDescription.split('\n')[0].replace(/#|[*]/g, '').trim() }));
+      addToast('IA: Título optimizado', 'success');
+    } catch (err) {
+      console.error('Error IA:', err);
+      addToast('Error al conectar con la IA', 'error');
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
   return (
     <div className="property-generator fade-in">
       <header className="section-header">
@@ -110,10 +143,26 @@ const PropertyGenerator = () => {
           <div className="form-content">
             <div className="form-group">
               <label className="form-label">Título del Anuncio</label>
-              <input
-                type="text" name="title" className="input-glass"
-                value={property.title} onChange={handleInputChange}
-              />
+              <div style={{ display: 'flex', gap: '8px' }}>
+                <input
+                  type="text"
+                  name="title"
+                  className="input-glass"
+                  placeholder="Ej: Hermosa Casa Moderna"
+                  value={property.title}
+                  onChange={handleInputChange}
+                  style={{ flex: 1 }}
+                />
+                <button
+                  type="button"
+                  className="btn btn-glass"
+                  onClick={handleGenerateAIDescription}
+                  title="Optimizar con IA"
+                  style={{ padding: '0 12px' }}
+                >
+                  <Sparkles size={18} color="var(--accent-cyan)" />
+                </button>
+              </div>
             </div>
 
             <div className="form-group">

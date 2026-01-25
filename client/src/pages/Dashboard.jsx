@@ -108,7 +108,7 @@ function Dashboard() {
                 <div className="content-section glass-card">
                     <div className="section-header">
                         <h3 className="h4">Propiedades Recientes</h3>
-                        <button className="link-primary" onClick={() => console.log('Ver todas')}>Ver todas</button>
+                        <button className="link-primary" onClick={() => navigate('/properties')}>Ver todas</button>
                     </div>
 
                     <div className="posts-list">
@@ -172,7 +172,7 @@ function Dashboard() {
                             </div>
                         </button>
 
-                        <button className="action-btn" onClick={() => console.log('Ver catálogo')}>
+                        <button className="action-btn" onClick={() => navigate('/properties')}>
                             <div className="action-btn__icon">
                                 <List size={24} />
                             </div>

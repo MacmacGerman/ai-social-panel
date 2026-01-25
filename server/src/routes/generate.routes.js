@@ -11,5 +11,6 @@ router.post('/caption', geminiService.generateCaption)
 router.post('/hashtags', geminiService.generateHashtags)
 router.post('/ideas', geminiService.generateIdeas)
 router.post('/post', geminiService.generatePost)
+router.post('/property', geminiService.generatePropertyDescription)
 
 export default router
