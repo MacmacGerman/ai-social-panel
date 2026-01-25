@@ -44,7 +44,7 @@ function Dashboard() {
             {/* Header */}
             <header className="dashboard__header">
                 <div>
-                    <h1 className="h1">Panel Inmobiliario</h1>
+                    <h1 className="h1">🟢 Panel Inmobiliario <small style={{ fontSize: '0.5em', opacity: 0.5 }}>v2.0</small></h1>
                     <p className="body-large" style={{ color: 'var(--text-secondary)' }}>
                         Gestión inteligente de tus propiedades y marketing digital
                     </p>
