@@ -43,8 +43,10 @@ function PropertyList() {
     }
 
     const filteredProperties = properties.filter(prop => {
-        const matchesSearch = prop.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            prop.address.toLowerCase().includes(searchTerm.toLowerCase())
+        const title = prop.title || ''
+        const address = prop.address || ''
+        const matchesSearch = title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            address.toLowerCase().includes(searchTerm.toLowerCase())
         const matchesFilter = filterStatus === 'all' || prop.status === filterStatus
         return matchesSearch && matchesFilter
     })
