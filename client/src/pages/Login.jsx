@@ -16,6 +16,15 @@ function Login() {
 
     // Check for existing session on mount
     useEffect(() => {
+        // Capturar errores de redirección (OAuth) en el hash
+        const hash = window.location.hash
+        if (hash.includes('error')) {
+            const params = new URLSearchParams(hash.slice(1))
+            const errorDesc = params.get('error_description') || params.get('error')
+            console.error('❌ Error OAuth detectado:', errorDesc)
+            addToast(errorDesc, 'error')
+        }
+
         supabase.auth.getSession().then(({ data: { session } }) => {
             if (session) {
                 console.log('✅ Session found, redirecting...')
@@ -55,7 +64,7 @@ function Login() {
                 })
 
                 if (error) throw error
-                
+
                 console.log('✅ Login exitoso:', data.user.email)
                 addToast('¡Bienvenido de vuelta!', 'success')
                 navigate('/')
@@ -87,11 +96,15 @@ function Login() {
 
     const handleGoogleLogin = async () => {
         try {
-            console.log('🚀 Iniciando Google OAuth...')
+            console.log('🚀 Iniciando Google OAuth con Modelo Maestro...')
             const { error } = await supabase.auth.signInWithOAuth({
                 provider: 'google',
                 options: {
-                    redirectTo: window.location.origin + '/login'
+                    redirectTo: window.location.origin + '/login',
+                    queryParams: {
+                        access_type: 'offline',
+                        prompt: 'consent'
+                    }
                 }
             })
 
