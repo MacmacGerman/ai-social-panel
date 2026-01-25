@@ -55,7 +55,7 @@ function PropertyList() {
         <div className="property-list fade-in">
             <header className="list-header">
                 <div>
-                    <h1 className="h1">🟢 Mis Propiedades <small style={{ fontSize: '0.5em', opacity: 0.5 }}>v2.0</small></h1>
+                    <h1 className="h1">🔵 Mis Propiedades <small style={{ fontSize: '0.5em', opacity: 0.5 }}>v3.0</small></h1>
                     <p className="body-large text-secondary">
                         Gestiona tu inventario y genera material de marketing
                     </p>
